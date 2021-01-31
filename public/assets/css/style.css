@@ -1,0 +1,115 @@
+@font-face {
+    font-family: "LPMQ";
+    src: url("../fonts/LPMQ\ IsepMisbah.ttf") format("truetype");
+}
+body {
+    font-family: "LPMQ";
+}
+
+.ar {
+    font-size: 30px;
+    line-height: 70px;
+}
+.id {
+    font-size: 18px;
+}
+
+/* digital clock */
+.digital {
+    display: flex;
+    justify-content: center;
+}
+
+/* analog clock */
+.analog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.analog span {
+    width: 150px;
+    height: 150px;
+    border: 4px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.analog span::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 11;
+    background-color: rgb(86, 42, 245);
+}
+.hour,
+.minute,
+.second {
+    position: absolute;
+}
+.hour,
+.hr {
+    width: 80px;
+    height: 80px;
+}
+.minute,
+.mn {
+    width: 100px;
+    height: 100px;
+}
+.second,
+.sc {
+    width: 120px;
+    height: 120px;
+}
+.hr,
+.mn,
+.sc {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+.hr::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 40px;
+    background-color: black;
+}
+.mn::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 50px;
+    background-color: black;
+}
+.sc::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 60px;
+    background-color: rgb(86, 42, 245);
+}
+
+/* kiblat */
+.kompas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.kompas .images {
+    width: 350px;
+}
+
+/* screen 991 */
+@media screen and (max-width: 991px) {
+    ul li:first-child {
+        padding-left: 15px;
+    }
+
+    select {
+        margin-bottom: 10px;
+    }
+}
