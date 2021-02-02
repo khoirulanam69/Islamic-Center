@@ -4,7 +4,7 @@
 
 @section('content')
 {{-- {{dd($ar)}} --}}
-    <div class="container mt-5">
+    <div class="container" style="margin-top: 100px">
         <div class="row justify-content-beetwen">
             <div class="col">
                 <h3>Surah {{$ar->data->englishName}}</h3>

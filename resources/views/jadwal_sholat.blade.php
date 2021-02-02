@@ -4,7 +4,7 @@
 
 @section('content')
 {{-- {{dd($cityname)}} --}}
-<div class="container mt-5">
+<div class="container" style="margin-top: 100px">
     <form action="/jadwalsholat" method="POST" class="text-right">
         @csrf
         <div class="row justify-content-end">

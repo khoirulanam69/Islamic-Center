@@ -3,7 +3,7 @@
 @section('title', 'Kiblat')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container"  style="margin-top: 100px">
         <div class="kompas mt-5">
             <div class="images">
               <img src="./assets/img/compass.png" width="350px" alt="compass" />

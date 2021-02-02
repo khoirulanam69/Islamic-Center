@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- {{dd($data)}} --}}
-    <div class="container mt-5">
+    <div class="container" style="margin-top: 100px">
         <h3>Al-Qur'an</h3>
         <table class="table">
             <thead class="thead-dark">
