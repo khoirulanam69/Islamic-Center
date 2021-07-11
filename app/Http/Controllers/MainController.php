@@ -20,23 +20,45 @@ class MainController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         $currentTime = date('Y-m-d');
-        $tgl = $request->input('tgl');
-        $idcity = $request->input('city');
-
-        $citys = $client->get('https://api.banghasan.com/sholat/format/json/kota');
-        $schedule = $client->get('https://api.banghasan.com/sholat/format/json/jadwal/kota/775/tanggal/' . $currentTime);
-
-        if ($tgl && $idcity) {
-            $schedule = $client->get('https://api.banghasan.com/sholat/format/json/jadwal/kota/' . $idcity . '/tanggal/' . $tgl);
+        $city = $request->input('city');
+        
+        // $citys = $client->get('https://api.banghasan.com/sholat/format/json/kota');
+        if ($city) {
+            try {
+                $schedule = $client->get('https://api.pray.zone/v2/times/today.json?city='. $city .'&key=MagicKey');
+                $data = [
+                    'response' => json_decode($schedule->getBody()),
+                    'city' => $city,
+                ];
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                if ($e->hasResponse()) {
+                    $response = $e->getResponse();
+                    $schedule = $response->getReasonPhrase(); // Response message;
+                    $data = [
+                        'response' => $schedule,
+                        'city' => $city,
+                    ];
+                }
+            }
+        } else {
+            try {
+                $schedule = $client->get('https://api.pray.zone/v2/times/today.json?city=malang&key=MagicKey');
+                $data = [
+                    'response' => json_decode($schedule->getBody()),
+                    'city' => $city,
+                ];
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                if ($e->hasResponse()) {
+                    $response = $e->getResponse();
+                    $schedule = $response->getReasonPhrase(); // Response message;
+                    $data = [
+                        'response' => $schedule,
+                        'city' => $city,
+                    ];
+                }
+            }
         }
 
-        $data = [
-            'schedule' => json_decode($schedule->getBody()),
-            'curtime' => $currentTime,
-            'citys' => json_decode($citys->getBody()),
-            'idcity' => $idcity,
-            'tgl' => $tgl
-        ];
         return view('jadwal_sholat', $data);
     }
 

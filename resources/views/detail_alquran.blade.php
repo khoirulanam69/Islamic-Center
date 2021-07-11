@@ -3,7 +3,6 @@
 @section('title', 'Al-quran')
 
 @section('content')
-{{-- {{dd($ar)}} --}}
     <div class="container" style="margin-top: 100px">
         <div class="row justify-content-beetwen">
             <div class="col">

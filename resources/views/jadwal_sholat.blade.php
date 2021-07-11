@@ -3,29 +3,16 @@
 @section('title', 'Jadwal Sholat')
 
 @section('content')
-{{-- {{dd($cityname)}} --}}
 <div class="container" style="margin-top: 100px">
     <form action="/jadwalsholat" method="POST" class="text-right">
         @csrf
         <div class="row justify-content-end">
             <div class="col-lg-3">
-                <select name="city" id="city" class="p-1" style="width: 250px">
-                    <option value="775" selected>KOTA MALANG</option>
-                    @foreach ($citys->kota as $city)
-                    @if ($city->id == $idcity)
-                        <option value="{{$city->id}}" selected>{{$city->nama}}</option>
-                    @endif
-                        <option value="{{$city->id}}">{{$city->nama}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-lg-3">
-                @if (!$tgl)
-                <input type="date" value="<?= $curtime?>" name="tgl">
+                @if ($city)
+                <input type="text" name="city" value="<?= $city?>" required>
                 @else
-                <input type="date" value="<?= $tgl?>" name="tgl">
+                <input type="text" name="city" value="Malang" required>
                 @endif
-                <button type="submit">Cari</button>
             </div>
         </div>
     </form>
@@ -50,11 +37,7 @@
         </div>
         <div class="col-sm-8">
             <h3>Prayer schedule</h3>
-            @if (!$tgl || $tgl == $curtime)
-                <h5 class="mt-5">Today</h5>
-            @else
-                <h5 class="mt-5">{{$tgl}}</h5>
-            @endif
+            <h5>Today</h5>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -67,12 +50,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{$schedule->jadwal->data->subuh}}</td>
-                        <td>{{$schedule->jadwal->data->dzuhur}}</td>
-                        <td>{{$schedule->jadwal->data->ashar}}</td>
-                        <td>{{$schedule->jadwal->data->maghrib}}</td>
-                        <td>{{$schedule->jadwal->data->isya}}</td>
+                    @if ($response == "Internal Server Error")
+                        <td>{{$response}}</td>
+                    @else
+                        <td>{{$response->results->datetime[0]->times->Fajr}}</td>
+                        <td>{{$response->results->datetime[0]->times->Dhuhr}}</td>
+                        <td>{{$response->results->datetime[0]->times->Asr}}</td>
+                        <td>{{$response->results->datetime[0]->times->Maghrib}}</td>
+                        <td>{{$response->results->datetime[0]->times->Isha}}</td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
